@@ -15,9 +15,10 @@ int main(int argc, char *argv[]) {
     cin >> ch;
     const string cf = "codeforces";
 
-    if (any_of(cf.begin(), cf.end(), [ch](char c) { return c == ch; })) cout << "YES\n";
-    else cout << "NO\n";
-
+    if (any_of(cf.begin(), cf.end(), [ch](char c) { return c == ch; }))
+      cout << "YES\n";
+    else
+      cout << "NO\n";
   }
   return 0;
 }
