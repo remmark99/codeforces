@@ -9,10 +9,12 @@ int main(int argc, char *argv[]) {
   cin >> tt;
 
   while (tt--) {
-    int a, b, c;
-    cin >> a >> b >> c;
+    vector<int> arr(3);
 
-    int max
+    cin >> arr[0] >> arr[1] >> arr[2];
+    sort(arr.begin(), arr.end());
+
+    cout << arr[1] << '\n';
   }
 
   return 0;
