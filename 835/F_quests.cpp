@@ -11,7 +11,7 @@ int bin_search(vector<int> *sums, int n, int c, int d) {
     int k = (a + b) / 2;
 
     if ((*sums)[min(k, n - 1)] * (d / max(k, 1)) +
-            (*sums)[min(n - 1, (d % max(1, k) - 1))] >=
+            (*sums)[min(n - 1, (d % (k + 1) - 1))] >=
         c) {
       min_found = k;
       a = k + 1;
@@ -31,6 +31,7 @@ int main(int argc, char *argv[]) {
   cin >> tt;
 
   while (tt--) {
+    // TODO(Vi): c should be uint64_t
     int n, c, d;
     cin >> n >> c >> d;
 
