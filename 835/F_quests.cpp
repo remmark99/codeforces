@@ -4,15 +4,16 @@
 
 using namespace std;
 
-int bin_search(vector<int> *sums, int n, int c, int d) {
+int bin_search(vector<uint64_t> *sums, int n, uint64_t c, int d) {
   int min_found = -1;
   int a = 0, b = d;
   while (a <= b) {
     int k = (a + b) / 2;
 
-    if ((*sums)[min(k, n - 1)] * (d / max(k, 1)) +
-            (*sums)[min(n - 1, (d % (k + 1) - 1))] >=
-        c) {
+    uint64_t full_cycles = (*sums)[min(k, n - 1)] * (d / (k + 1));
+    uint64_t remainder =
+        (d % (k + 1) - 1) >= 0 ? (*sums)[min(n - 1, (d % (k + 1) - 1))] : 0;
+    if (full_cycles + remainder >= c) {
       min_found = k;
       a = k + 1;
     } else {
@@ -32,10 +33,11 @@ int main(int argc, char *argv[]) {
 
   while (tt--) {
     // TODO(Vi): c should be uint64_t
-    int n, c, d;
+    uint64_t n, d;
+    uint64_t c;
     cin >> n >> c >> d;
 
-    vector<int> arr(n);
+    vector<uint64_t> arr(n);
 
     for (int i = 0; i < n; i++) {
       cin >> arr[i];
@@ -43,14 +45,14 @@ int main(int argc, char *argv[]) {
 
     sort(arr.rbegin(), arr.rend());
 
-    vector<int> sums(n);
-    int sum = 0;
+    vector<uint64_t> sums(n);
+    uint64_t sum = 0;
     for (int i = 0; i < n; i++) {
       sum += arr[i];
       sums[i] = sum;
     }
 
-    if (sums[n - 1] * d < c) {
+    if (sums[0] * d < c) {
       cout << "Impossible" << endl;
       continue;
     }
